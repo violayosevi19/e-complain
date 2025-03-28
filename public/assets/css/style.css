@@ -1,0 +1,59 @@
+.alamat {
+    box-shadow: inset 0 0 0 0 #54b3d6;
+    color: #54b3d6;
+    margin: 0 -0.05rem;
+    padding: 0.5rem;
+    border-radius: 1rem;
+    transition: color 0.5s ease-in-out, box-shadow 0.5s ease-in-out;
+}
+.alamat:hover {
+    box-shadow: inset 500px 0 0 0 #54b3d6;
+    color: white;
+    padding: 0.5rem;
+    border-radius: 1rem;
+}
+
+.email {
+    margin: 0 -0.1rem;
+    padding: 0.5rem;
+    border-radius: 1rem;
+    color: #54b3d6;
+    transition: color 0.5s ease-in-out, box-shadow 0.5s ease-in-out;
+}
+
+.email:hover {
+    box-shadow: inset 500px 0 0 0 #54b3d6;
+    color: white;
+    padding: 0.5rem;
+    border-radius: 1rem;
+}
+
+.puskesmas {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+
+@media (max-width: 768px) {
+    .img-puskesmas {
+        width: 100%;
+    }
+
+    .puskesmas {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+}
+
+
+#complain {
+    width: 100%;
+    height: 50vh;
+    overflow: hidden;
+}
+
+#submit {
+    width: 100%;
+}
+

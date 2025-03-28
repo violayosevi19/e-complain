@@ -1,0 +1,92 @@
+@extends('layout.main')
+@section('container')
+            <nav class="navbar navbar-expand-lg " color-on-scroll="500">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="#pablo"> Review Complain </a>
+                    <button href="" class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-bar burger-lines"></span>
+                        <span class="navbar-toggler-bar burger-lines"></span>
+                        <span class="navbar-toggler-bar burger-lines"></span>
+                    </button>
+                    <div class="collapse navbar-collapse justify-content-end" id="navigation">
+                        
+                        @if(!$hideActions)
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="/logout">
+                                    <span class="no-icon">Log out</span>
+                                </a>
+                            </li>
+                        </ul>
+                        @endif
+                    </div>
+                </div>
+            </nav>
+            <!-- End Navbar -->
+            <div class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            @if(session()->has('pesan'))
+                                    <div class="alert alert-danger" role="alert" id="alert">
+                                        {{ session('pesan') }}
+                                    </div>
+                                   
+                            @endif
+                        </div>
+                        <div class="col-md-12">
+                            <div class="card strpied-tabled-with-hover">
+                                <div class="card-header ">
+                                    <h4 class="card-title text-center">Review Complain</h4>
+                                </div>
+                                <div class="card-body table-full-width table-responsive">
+                                    <table class="table table-hover table-lg">
+                                        <thead>
+                                            <th>No</th>
+                                            <th>Tanggal/Waktu</th>
+                                            <th>Jenis Complain</th>
+                                            <th>Complain</th>
+                                            <th>Tanggapan Complain</th>
+                                            @if(!$hideActions)
+                                             <th>Aksi</th>
+                                             @endif
+                                        </thead>
+                                        <tbody>
+                                            @foreach($reviewcomplain as $review)
+                                            <tr>
+                                                <td>{{$review->id}}</td>
+                                                <td>{{$review->created_at}}</td>
+                                                <td>{{$review->jeniscomplain_id}}</td>
+                                                <td>{{$review->complain}}</td>
+                                                <td>{{$review->tanggapan}}</td>
+                                                @if(!$hideActions)
+                                                <td>
+                                                    <a href="/review-complain/{{$review->id}}/edit" class="btn btn-warning">Berikan Tanggapan</a> 
+                                                    <form  class="d-inline" action="/ecomplain/{{$review->id}}" method="post">
+                                                        @method('delete')
+                                                        @csrf
+                                                        <button class="btn btn-danger ml-2" onclick="return confirm('Yakin ingin menghapus data ?')">Delete
+                                                        </button>
+                                                    </form>
+                                                </td>
+                                                @endif
+                                            </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    @endsection   
+    <script src="/../assets/js/core/jquery.3.2.1.min.js" type="text/javascript"></script>   
+    <script>
+        $(document).ready(function(){
+            setTimeout(function() {
+                $("#alert").fadeOut("slow");
+            }, 3000);
+        });
+    </script>
