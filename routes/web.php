@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LaporanController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\JeniscomplainController;
 use App\Http\Controllers\HomeController;
@@ -27,6 +28,7 @@ Route::get('/logout', [LoginControllerController::class,'logout']);
 Route::resource('/home',HomeController::class);
 Route::resource('/ecomplain',ComplainController::class);
 Route::resource('/review-complain',ReviewComplainController::class);
+Route::get('/laporan',[LaporanController::class, 'laporan']);
 // Route::delete('/review-complain/{id}',[ReviewComplainController::class,'destroy']);
 
 
