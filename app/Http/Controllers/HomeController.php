@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\complain;
 use App\Models\Home;
 use Illuminate\Http\Request;
 use App\Models\jeniscomplain;
@@ -15,9 +16,13 @@ class HomeController extends Controller
     {
         $jenisUser = JenisUser::pluck('jenisuser')->toArray();
         $hideActions = in_array('Pasien', $jenisUser) && !Auth::check();
+        
+        // dd($hideActions);
         return view('ecomplain.dashboard',[
             'dashboard'=>jeniscomplain::All(),
-            'hideActions' => $hideActions
+            'hideActions' => $hideActions,
+            'reviewcomplain'=>complain::All(),
+            'jeniscomplains'=>jeniscomplain::All(),
         ]);
     }
 }
