@@ -13,9 +13,12 @@ return new class extends Migration
     {
         Schema::create('complains', function (Blueprint $table) {
             $table->id();
+            $table->text('nama');
             $table->string('jeniscomplain_id');
             $table->text('complain');
             $table->text('tanggapan')->nullable();
+            $table->text('image')->nullable();
+            $table->boolean('is_read')->default(false);
             $table->timestamps();
         });
     }

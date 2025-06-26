@@ -20,18 +20,15 @@ use App\Http\Controllers\LoginAsController;
 |
 */
 
-Route::get('/',[LoginAsController::class,'index'])->name('loginas')->Middleware('guest');    
-Route::get('/login', [LoginControllerController::class,'login']);
-Route::post('/login', [LoginControllerController::class,'authenticate']);
-Route::get('/logout', [LoginControllerController::class,'logout']);
-    // Route::resource('/home',HomeController::class)->Middleware('auth');
-Route::resource('/home',HomeController::class);
-Route::resource('/ecomplain',ComplainController::class);
-Route::resource('/review-complain',ReviewComplainController::class);
-Route::get('/laporan',[LaporanController::class, 'laporan']);
+Route::get('/', [LoginAsController::class, 'index'])->name('loginas')->Middleware('guest');
+Route::get('/login', [LoginControllerController::class, 'login']);
+Route::post('/login', [LoginControllerController::class, 'authenticate']);
+Route::get('/logout', [LoginControllerController::class, 'logout']);
+// Route::resource('/home',HomeController::class)->Middleware('auth');
+Route::resource('/home', HomeController::class);
+Route::resource('/ecomplain', ComplainController::class);
+Route::resource('/review-complain', ReviewComplainController::class);
+Route::get('/laporan', [LaporanController::class, 'laporan']);
+Route::post('/complain/read/{id}', [ReviewComplainController::class, 'markAsRead']);
+Route::get('/review-complain/read/{id}', [ReviewComplainController::class, 'read'])->name('review-complain.read');
 // Route::delete('/review-complain/{id}',[ReviewComplainController::class,'destroy']);
-
-
-
-
-

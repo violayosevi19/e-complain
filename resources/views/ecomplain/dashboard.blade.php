@@ -13,6 +13,34 @@
 
                 @if (!$hideActions)
                     <ul class="navbar-nav ml-auto">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle position-relative" href="#" id="notifDropdown"
+                                role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-bell fa-lg"></i>
+
+                                @if (count($notifications ?? []) > 0)
+                                    <span
+                                        class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                                        style="font-size: 0.6rem; min-width: 18px; height: 18px; padding: 4px;">
+                                        {{ count($notifications) }}
+                                    </span>
+                                @endif
+                            </a>
+
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="notifDropdown">
+                                @forelse ($notifications as $notif)
+                                    <a class="dropdown-item" href="{{ url('/review-complain/' . $notif->id) }}">
+                                        <strong>{{ $notif->nama }} baru saja menambahkan complain</strong><br>
+                                        <small>{{ Str::limit($notif->complain, 40) }}</small><br>
+                                        <small class="text-muted">{{ $notif->created_at->diffForHumans() }}</small>
+                                    </a>
+                                @empty
+                                    <span class="dropdown-item text-muted">Tidak ada notifikasi</span>
+                                @endforelse
+                            </div>
+                        </li>
+
+
                         <li class="nav-item">
                             <a class="nav-link" href="/logout">
                                 <span class="no-icon">Log out</span>
@@ -91,13 +119,18 @@
                                 <h4 class="card-title">Silahkan isi form complain</h4>
                             </div>
                             <div class="card-body " style="width: 100%; height: 100%;">
-                                <form action="/ecomplain" method="post">
+                                <form action="/ecomplain" method="post" enctype="multipart/form-data">
                                     @csrf
+                                    <div class="mb-3">
+                                        <label for="nama" class="form-label label-complain">Nama</label>
+                                        <input type="text" class="form-control" name="nama" id="nama"
+                                            aria-describedby="nama">
+                                    </div>
                                     <div class="dropdown">
                                         <a id="jenisComplainDropdown" class="dropdown-toggle btn ml-1 mt-1 mb-3" type="button"
                                             href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown"
                                             aria-haspopup="true" aria-expanded="false">
-                                            <span class="no-icon">Silahkan Pilih</span>
+                                            <span class="no-icon">Silahkan Pilih Jenis Complain</span>
                                         </a>
                                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                             @foreach ($jeniscomplains as $jeniscomplain)
@@ -107,6 +140,12 @@
                                         </div>
                                         <input type="hidden" id="hiddenJenisComplainInput" name="jeniscomplain_id"
                                             value="">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="fileUpload" class="form-label label-complain">Upload Bukti
+                                        </label>
+                                        <input class="form-control form-control-sm" type="file" id="fileUpload"
+                                            name="image">
                                     </div>
                                     <div class="mb-3">
                                         <label for="exampleInputEmail1" class="form-label label-complain">Tulis complain
@@ -134,9 +173,11 @@
                                 <table class="table table-hover table-lg">
                                     <thead>
                                         <th>No</th>
+                                        <th>Nama</th>
                                         <th>Tanggal/Waktu</th>
                                         <th>Jenis Complain</th>
                                         <th>Complain</th>
+                                        <th>Image</th>
                                         <th>Tanggapan Complain</th>
                                         @if (!$hideActions)
                                             <th>Aksi</th>
@@ -146,9 +187,14 @@
                                         @foreach ($reviewcomplain as $review)
                                             <tr>
                                                 <td>{{ $review->id }}</td>
-                                                <td>{{ $review->created_at }}</td>
+                                                <td>{{ $review->nama }}</td>
+                                                <td>{{ $review->created_at?->format('d M Y , H:i') ?? date('d-m-Y H:i') }}</td>
                                                 <td>{{ $review->jeniscomplain_id }}</td>
                                                 <td>{{ $review->complain }}</td>
+                                                <td>
+                                                    <img src="{{ asset('storage/' . $review->image) }}" alt="Gambar Bukti"
+                                                        width="100">
+                                                </td>
                                                 <td>{{ $review->tanggapan }}</td>
                                                 @if (!$hideActions)
                                                     <td>

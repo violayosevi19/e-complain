@@ -13,6 +13,32 @@
 
                 @if (!$hideActions)
                     <ul class="navbar-nav ml-auto">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle position-relative" href="#" id="notifDropdown"
+                                role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-bell fa-lg"></i>
+
+                                @if (count($notifications ?? []) > 0)
+                                    <span
+                                        class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                                        style="font-size: 0.6rem; min-width: 18px; height: 18px; padding: 4px;">
+                                        {{ count($notifications) }}
+                                    </span>
+                                @endif
+                            </a>
+
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="notifDropdown">
+                                @forelse ($notifications as $notif)
+                                    <a class="dropdown-item" href="{{ url('/review-complain/' . $notif->id) }}">
+                                        <strong>{{ $notif->nama }} baru saja menambahkan complain</strong><br>
+                                        <small>{{ Str::limit($notif->complain, 40) }}</small><br>
+                                        <small class="text-muted">{{ $notif->created_at->diffForHumans() }}</small>
+                                    </a>
+                                @empty
+                                    <span class="dropdown-item text-muted">Tidak ada notifikasi</span>
+                                @endforelse
+                            </div>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/logout">
                                 <span class="no-icon">Log out</span>

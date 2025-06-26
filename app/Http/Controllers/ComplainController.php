@@ -10,32 +10,37 @@ use Illuminate\Support\Facades\Auth;
 
 class ComplainController extends Controller
 {
-   
+
     public function index()
     {
         $jenisUser = JenisUser::pluck('jenisuser')->toArray();
-        $hideActions = in_array('Pasien',$jenisUser) && !Auth::check();
-        return view('ecomplain.ecomplain',[
-            'jeniscomplains'=>jeniscomplain::All(),
+        $hideActions = in_array('Pasien', $jenisUser) && !Auth::check();
+        return view('ecomplain.ecomplain', [
+            'jeniscomplains' => jeniscomplain::All(),
             'hideActions' => $hideActions,
         ]);
     }
 
-   
+
     public function store(Request $request)
     {
         $validateData = $request->validate([
+            'nama' => 'required',
             'jeniscomplain_id' => 'required',
-            'complain' => 'required'
+            'complain' => 'required',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif'
         ]);
 
+        if ($request->hasFile('image')) {
+            $filePath = $request->file('image')->store('complain-files', 'public');
+            $validateData['image'] = $filePath;
+        }
+
+
         complain::create($validateData);
-        return redirect('/ecomplain')->with('pesan','Complain berhasil ditambahkan');
+        return redirect('/home')->with('pesan', 'Complain berhasil ditambahkan');
     }
 
-    
-    public function destroy(complain $complain,$id)
-    {
-         
-    }
+
+    public function destroy(complain $complain, $id) {}
 }

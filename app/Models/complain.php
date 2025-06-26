@@ -8,11 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class complain extends Model
 {
     use HasFactory;
-    protected $fillable =['jeniscomplain_id','complain'];
+    protected $guarded = [];
 
     public function jenisComplain()
     {
         return $this->belongsTo(jeniscomplain::class, 'jeniscomplain_id');
     }
-
 }

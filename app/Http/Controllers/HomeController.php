@@ -11,18 +11,20 @@ use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
-   
+
     public function index()
     {
+        $notifications = Complain::orderBy('created_at', 'desc')->take(5)->get();
         $jenisUser = JenisUser::pluck('jenisuser')->toArray();
         $hideActions = in_array('Pasien', $jenisUser) && !Auth::check();
-        
+
         // dd($hideActions);
-        return view('ecomplain.dashboard',[
-            'dashboard'=>jeniscomplain::All(),
+        return view('ecomplain.dashboard', [
+            'notifications' => $notifications,
+            'dashboard' => jeniscomplain::All(),
             'hideActions' => $hideActions,
-            'reviewcomplain'=>complain::All(),
-            'jeniscomplains'=>jeniscomplain::All(),
+            'reviewcomplain' => complain::All(),
+            'jeniscomplains' => jeniscomplain::All(),
         ]);
     }
 }
