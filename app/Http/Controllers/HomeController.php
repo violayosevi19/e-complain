@@ -14,7 +14,7 @@ class HomeController extends Controller
 
     public function index()
     {
-        $notifications = Complain::orderBy('created_at', 'desc')->take(5)->get();
+        $notifications = Complain::where('is_read', false)->orderBy('created_at', 'desc')->take(5)->get();
         $jenisUser = JenisUser::pluck('jenisuser')->toArray();
         $hideActions = in_array('Pasien', $jenisUser) && !Auth::check();
 
