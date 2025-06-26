@@ -88,7 +88,7 @@
                                 </script>
                             @endif
                             <div class="card-header ">
-                                <h4 class="card-title">FORM KOMPLAIN PUSKESMAS DADOK TUNGGUL HITAM</h4>
+                                <h4 class="card-title">Silahkan isi form complain</h4>
                             </div>
                             <div class="card-body " style="width: 100%; height: 100%;">
                                 <form action="/ecomplain" method="post">
@@ -97,7 +97,7 @@
                                         <a id="jenisComplainDropdown" class="dropdown-toggle btn ml-1 mt-1 mb-3" type="button"
                                             href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown"
                                             aria-haspopup="true" aria-expanded="false">
-                                            <span class="no-icon">Jenis Complain</span>
+                                            <span class="no-icon">Silahkan Pilih</span>
                                         </a>
                                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                             @foreach ($jeniscomplains as $jeniscomplain)
@@ -114,7 +114,7 @@
                                         <textarea type="text" class="form-control" name="complain" id="complain" aria-describedby="emailHelp"></textarea>
                                     </div>
                                     <button type="submit" class="btn btn-primary text-center" name="submit"
-                                        id="submit">Submit</button>
+                                        id="submit">Laporkan</button>
                                 </form>
                             </div>
                         </div>
