@@ -12,12 +12,12 @@
             </a>
         </li>
         @auth
-            <li class=" {{ Request::is('ecomplain') ? 'active' : '' }}">
+            {{-- <li class=" {{ Request::is('ecomplain') ? 'active' : '' }}">
                 <a class="nav-link" href="{{ url('ecomplain') }}">
                     <i class="nc-icon nc-pin-3"></i>
                     <p>Complain</p>
                 </a>
-            </li>
+            </li> --}}
             <li class=" {{ Request::is('review-complain') ? 'active' : '' }}">
                 <a class="nav-link" href="{{ url('review-complain') }}">
                     <i class="nc-icon nc-notes"></i>
