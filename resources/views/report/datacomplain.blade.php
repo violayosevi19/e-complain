@@ -163,9 +163,11 @@
             <table>
                 <tr>
                     <th>No</th>
+                    <th>Nama</th>
                     <th>Tanggal/Waktu</th>
                     <th>Jenis Complain</th>
                     <th>Complain</th>
+                    <th>Image</th>
                     <th>Tanggapan Complain</th>
                 </tr>
                 @php
@@ -174,9 +176,13 @@
                 @foreach ($datas as $item)
                     <tr>
                         <td class="small-col">{{ $index }}</td>
-                        <td>{{ $item->created_at }}</td>
+                        <td>{{ $item->nama }}</td>
+                        <td>{{ $item->created_at?->format('d M Y , H:i') ?? date('d-m-Y H:i') }}</td>
                         <td>{{ $item->jeniscomplain_id }}</td>
                         <td>{{ $item->complain }}</td>
+                        <td>
+                            <img src="{{ asset('storage/' . $item->image) }}" alt="Gambar Bukti" width="100">
+                        </td>
                         <td>{{ $item->tanggapan }}</td>
                     </tr>
                     @php

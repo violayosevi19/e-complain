@@ -29,11 +29,13 @@
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="notifDropdown">
                                 @forelse ($notifications as $notif)
-                                    <a class="dropdown-item" href="{{ url('/review-complain/' . $notif->id) }}">
+                                    <a href="{{ route('review-complain.read', $notif->id) }}"
+                                        class="dropdown-item notif-link" data-id="{{ $notif->id }}">
                                         <strong>{{ $notif->nama }} baru saja menambahkan complain</strong><br>
                                         <small>{{ Str::limit($notif->complain, 40) }}</small><br>
                                         <small class="text-muted">{{ $notif->created_at->diffForHumans() }}</small>
                                     </a>
+
                                 @empty
                                     <span class="dropdown-item text-muted">Tidak ada notifikasi</span>
                                 @endforelse
@@ -184,9 +186,12 @@
                                         @endif
                                     </thead>
                                     <tbody>
+                                        @php
+                                            $i = 1;
+                                        @endphp
                                         @foreach ($reviewcomplain as $review)
                                             <tr>
-                                                <td>{{ $review->id }}</td>
+                                                <td>{{ $i++ }}</td>
                                                 <td>{{ $review->nama }}</td>
                                                 <td>{{ $review->created_at?->format('d M Y , H:i') ?? date('d-m-Y H:i') }}</td>
                                                 <td>{{ $review->jeniscomplain_id }}</td>

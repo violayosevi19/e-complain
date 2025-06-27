@@ -75,21 +75,31 @@
                             <table class="table table-hover table-lg">
                                 <thead>
                                     <th>No</th>
+                                    <th>Nama</th>
                                     <th>Tanggal/Waktu</th>
                                     <th>Jenis Complain</th>
                                     <th>Complain</th>
+                                    <th>Image</th>
                                     <th>Tanggapan Complain</th>
                                     @if (!$hideActions)
                                         <th>Aksi</th>
                                     @endif
                                 </thead>
                                 <tbody>
+                                    @php
+                                        $i = 1;
+                                    @endphp
                                     @foreach ($reviewcomplain as $review)
                                         <tr>
-                                            <td>{{ $review->id }}</td>
-                                            <td>{{ $review->created_at }}</td>
+                                            <td>{{ $i++ }}</td>
+                                            <td>{{ $review->nama }}</td>
+                                            <td>{{ $review->created_at?->format('d M Y , H:i') ?? date('d-m-Y H:i') }}</td>
                                             <td>{{ $review->jeniscomplain_id }}</td>
                                             <td>{{ $review->complain }}</td>
+                                            <td>
+                                                <img src="{{ asset('storage/' . $review->image) }}" alt="Gambar Bukti"
+                                                    width="100">
+                                            </td>
                                             <td>{{ $review->tanggapan }}</td>
                                             @if (!$hideActions)
                                                 <td>

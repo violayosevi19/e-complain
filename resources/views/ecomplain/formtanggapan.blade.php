@@ -2,7 +2,7 @@
 @section('container')
     <nav class="navbar navbar-expand-lg " color-on-scroll="500">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#pablo">COMPLAIN</a>
+            <a class="navbar-brand" href="#pablo">REVIEW COMPLAIN</a>
             <button href="" class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
                 aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-bar burger-lines"></span>
@@ -29,11 +29,13 @@
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="notifDropdown">
                                 @forelse ($notifications as $notif)
-                                    <a class="dropdown-item" href="{{ url('/review-complain/' . $notif->id) }}">
+                                    <a href="{{ route('review-complain.read', $notif->id) }}"
+                                        class="dropdown-item notif-link" data-id="{{ $notif->id }}">
                                         <strong>{{ $notif->nama }} baru saja menambahkan complain</strong><br>
                                         <small>{{ Str::limit($notif->complain, 40) }}</small><br>
                                         <small class="text-muted">{{ $notif->created_at->diffForHumans() }}</small>
                                     </a>
+
                                 @empty
                                     <span class="dropdown-item text-muted">Tidak ada notifikasi</span>
                                 @endforelse
@@ -68,8 +70,13 @@
                                     <textarea type="text" class="form-control" name="tanggapan" id="tanggapan" aria-describedby="emailHelp"
                                         style="height:50vh;">{{ $complains->tanggapan ? $complains->tanggapan : '' }}</textarea>
                                 </div>
-                                <button type="submit" class="btn btn-primary text-center" name="submit"
-                                    id="submit">Submit</button>
+                                <div class="d-flex">
+                                    <button type="submit" class="btn btn-primary text-center" name="submit"
+                                        id="submit">Simpan</button>
+                                    <a href="/review-complain" class="btn btn-info text-center w-100"
+                                        style="margin-left: 1rem;">Kembali</a>
+                                </div>
+
                             </form>
                         </div>
                     </div>
