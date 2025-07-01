@@ -11,7 +11,7 @@ use Laravel\Sanctum\HasApiTokens;
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
-     public function jenisUser()
+    public function jenisUser()
     {
         return $this->belongsTo(JenisUser::class, 'jenisuser_id');
     }
@@ -25,6 +25,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'jenisuser_id'
     ];
 
     /**

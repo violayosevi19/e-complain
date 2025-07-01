@@ -11,8 +11,8 @@
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navigation">
 
-                @if (!$hideActions)
-                    <ul class="navbar-nav ml-auto">
+                <ul class="navbar-nav ml-auto">
+                    @if (!$hideActions)
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle position-relative" href="#" id="notifDropdown"
                                 role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -41,15 +41,14 @@
                                 @endforelse
                             </div>
                         </li>
+                    @endif
 
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="/logout">
-                                <span class="no-icon">Log out</span>
-                            </a>
-                        </li>
-                    </ul>
-                @endif
+                    <li class="nav-item">
+                        <a class="nav-link" href="/logout">
+                            <span class="no-icon">Log out</span>
+                        </a>
+                    </li>
+                </ul>
             </div>
         </div>
     </nav>
@@ -78,7 +77,7 @@
                     </div>
                 </div>
             </div>
-            @guest
+            @if (auth()->user()->jenisuser_id === 'Pasien')
                 <div class="row">
                     <div class="col-md-4">
                         <div class="card ">
@@ -89,11 +88,13 @@
                                 <div class="legend">
                                     <p style="font-size:14px;">
                                         <i class="nc-icon nc-square-pin"></i> <a
-                                            href="https://maps.app.goo.gl/KUoBwpGG7yFmt7Ft8">Jl. Kesehatan No.10, Dadok Tunggul
+                                            href="https://maps.app.goo.gl/KUoBwpGG7yFmt7Ft8">Jl. Kesehatan No.10, Dadok
+                                            Tunggul
                                             Hitam, Kec. Koto Tangah, Kota Padang, Sumatera Barat 25586</a>
                                     </p>
                                     <p style="font-size:14px;"><i class="nc-icon nc-email-85"></i> <a
-                                            href="mailto:puskesmas.dadok@gmail.com" class="email">puskesmas.dadok@gmail.com<a>
+                                            href="mailto:puskesmas.dadok@gmail.com"
+                                            class="email">puskesmas.dadok@gmail.com<a>
                                     </p>
                                     <p style="font-size:14px;"> <i class="fa fa-phone"></i> - </p>
                                 </div>
@@ -129,9 +130,9 @@
                                             aria-describedby="nama">
                                     </div>
                                     <div class="dropdown">
-                                        <a id="jenisComplainDropdown" class="dropdown-toggle btn ml-1 mt-1 mb-3" type="button"
-                                            href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown"
-                                            aria-haspopup="true" aria-expanded="false">
+                                        <a id="jenisComplainDropdown" class="dropdown-toggle btn ml-1 mt-1 mb-3"
+                                            type="button" href="http://example.com" id="navbarDropdownMenuLink"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             <span class="no-icon">Silahkan Pilih Jenis Complain</span>
                                         </a>
                                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
@@ -193,12 +194,13 @@
                                             <tr>
                                                 <td>{{ $i++ }}</td>
                                                 <td>{{ $review->nama }}</td>
-                                                <td>{{ $review->created_at?->format('d M Y , H:i') ?? date('d-m-Y H:i') }}</td>
+                                                <td>{{ $review->created_at?->format('d M Y , H:i') ?? date('d-m-Y H:i') }}
+                                                </td>
                                                 <td>{{ $review->jeniscomplain_id }}</td>
                                                 <td>{{ $review->complain }}</td>
                                                 <td>
-                                                    <img src="{{ asset('storage/' . $review->image) }}" alt="Gambar Bukti"
-                                                        width="100">
+                                                    <img src="{{ asset('storage/' . $review->image) }}"
+                                                        alt="Gambar Bukti" width="100">
                                                 </td>
                                                 <td>{{ $review->tanggapan }}</td>
                                                 @if (!$hideActions)
@@ -224,7 +226,7 @@
                         </div>
                     </div>
                 </div>
-            @endguest
+            @endif
 
         </div>
     </div>

@@ -16,9 +16,16 @@ class HomeController extends Controller
     {
         $notifications = Complain::where('is_read', false)->orderBy('created_at', 'desc')->take(5)->get();
         $jenisUser = JenisUser::pluck('jenisuser')->toArray();
-        $hideActions = in_array('Pasien', $jenisUser) && !Auth::check();
+        $hideActions = true; // default sembunyi form
 
-        // dd($hideActions);
+        if (Auth::check()) {
+            // Misal kolom role langsung di users
+            $role = auth()->user()->jenisuser_id;
+          
+            // Kalau role = Pasien => hide, kalau selain Pasien => show
+            $hideActions = $role === 'Pasien';
+        }
+
         return view('ecomplain.dashboard', [
             'notifications' => $notifications,
             'dashboard' => jeniscomplain::All(),

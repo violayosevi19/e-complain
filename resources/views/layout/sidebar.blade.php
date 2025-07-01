@@ -11,7 +11,7 @@
                 <p>Dashboard</p>
             </a>
         </li>
-        @auth
+        @if (auth()->user()->jenisuser_id === 'Admin')
             {{-- <li class=" {{ Request::is('ecomplain') ? 'active' : '' }}">
                 <a class="nav-link" href="{{ url('ecomplain') }}">
                     <i class="nc-icon nc-pin-3"></i>
@@ -24,7 +24,8 @@
                     <p>Review Complain</p>
                 </a>
             </li>
-        @endauth
+        @endif
+
 
     </ul>
 </div>

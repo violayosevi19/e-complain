@@ -6,7 +6,7 @@
     <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
     <link rel="icon" type="image/png" href="../assets/img/favicon.ico">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <title>LOGIN E-COMPLAIN PUSKESMAS DADOK TUNGGUL HITAM</title>
+    <title>Register E-COMPLAIN PUSKESMAS DADOK TUNGGUL HITAM</title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
         name='viewport' />
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
@@ -34,8 +34,14 @@
                         <div class="row mb-4 px-3">
                             <h6 class="mb-0 mr-4 mt-4">Login</h6>
                         </div>
-                        <form method="post" action="/login" class="mt-3">
+                        <form method="post" action="{{ route('register.process') }}" class="mt-3">
                             @csrf
+                            <div class="row px-3">
+                                <label class="mb-1">
+                                    <h6 class="mb-0 text-sm">Nama</h6>
+                                </label>
+                                <input class="mb-4" type="text" name="name" placeholder="Enter a valid nama ">
+                            </div>
                             <div class="row px-3">
                                 <label class="mb-1">
                                     <h6 class="mb-0 text-sm">Email Address</h6>
@@ -48,23 +54,20 @@
                                     <h6 class="mb-0 text-sm">Password</h6>
                                 </label>
                                 <input type="password" name="password" placeholder="Enter password">
+                                <input type="text" name="jenisuser_id" placeholder="Enter users" hidden
+                                    value="Pasien">
                             </div>
                             <div class="row mb-3 px-3 mt-3">
-                                <button type="submit" class="btn btn-blue text-center">Login</button>
+                                <button type="submit" class="btn btn-blue text-center">Register</button>
                             </div>
-                            @if ($hideActions)
-                                <div>
-                                    <a href="/register">Belum punya akun?Daftar disini</a>
-                                </div>
-                            @endif
-
                         </form>
                     </div>
                 </div>
             </div>
             <div class="bg-blue py-4">
                 <div class="row px-3">
-                    <small class="ml-4 ml-sm-5 mb-2">Login to website e-complain Puskesmas Dadok Tunggul Hitam</small>
+                    <small class="ml-4 ml-sm-5 mb-2">Register to website e-complain Puskesmas Dadok Tunggul
+                        Hitam</small>
                 </div>
             </div>
         </div>

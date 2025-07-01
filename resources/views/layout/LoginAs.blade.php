@@ -28,7 +28,7 @@
             <hr class="my-4">
 
                 <a class="btn btn-primary btn-lg btn-block" style="color:white;" href="{{ in_array('Admin', $level) ? url('login') : '#' }}" name="admin">Admin</a>
-                <a class="btn btn-lg btn-block btn-primary" style="background-color: #dd4b39;color:white;" href="{{ in_array('Pasien', $level) ? url('home') : '#' }}" name="pasien">Pasien</a>
+                <a class="btn btn-lg btn-block btn-primary" style="background-color: #dd4b39;color:white;" href="{{ in_array('Pasien', $level) ? url('login') : '#' }}" name="pasien">Pasien</a>
           </div>
         </div>
       </div>
