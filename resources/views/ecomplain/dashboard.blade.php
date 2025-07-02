@@ -129,6 +129,11 @@
                                         <input type="text" class="form-control" name="nama" id="nama"
                                             aria-describedby="nama">
                                     </div>
+                                    <div class="mb-3">
+                                        <label for="email" class="form-label label-complain">Email</label>
+                                        <input type="text" class="form-control" name="email" id="email"
+                                            aria-describedby="email">
+                                    </div>
                                     <div class="dropdown">
                                         <a id="jenisComplainDropdown" class="dropdown-toggle btn ml-1 mt-1 mb-3"
                                             type="button" href="http://example.com" id="navbarDropdownMenuLink"
@@ -177,6 +182,7 @@
                                     <thead>
                                         <th>No</th>
                                         <th>Nama</th>
+                                        <th>Email</th>
                                         <th>Tanggal/Waktu</th>
                                         <th>Jenis Complain</th>
                                         <th>Complain</th>
@@ -194,6 +200,7 @@
                                             <tr>
                                                 <td>{{ $i++ }}</td>
                                                 <td>{{ $review->nama }}</td>
+                                                <td>{{ $review->email }}</td>
                                                 <td>{{ $review->created_at?->format('d M Y , H:i') ?? date('d-m-Y H:i') }}
                                                 </td>
                                                 <td>{{ $review->jeniscomplain_id }}</td>

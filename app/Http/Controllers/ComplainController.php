@@ -26,6 +26,7 @@ class ComplainController extends Controller
     {
         $validateData = $request->validate([
             'nama' => 'required',
+            'email' => 'required',
             'jeniscomplain_id' => 'required',
             'complain' => 'required',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif'

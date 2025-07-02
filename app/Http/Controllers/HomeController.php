@@ -21,7 +21,7 @@ class HomeController extends Controller
         if (Auth::check()) {
             // Misal kolom role langsung di users
             $role = auth()->user()->jenisuser_id;
-          
+
             // Kalau role = Pasien => hide, kalau selain Pasien => show
             $hideActions = $role === 'Pasien';
         }
@@ -30,7 +30,7 @@ class HomeController extends Controller
             'notifications' => $notifications,
             'dashboard' => jeniscomplain::All(),
             'hideActions' => $hideActions,
-            'reviewcomplain' => complain::All(),
+            'reviewcomplain' => complain::orderBy('created_at', 'desc')->get(),
             'jeniscomplains' => jeniscomplain::All(),
         ]);
     }

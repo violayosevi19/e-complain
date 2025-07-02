@@ -7,6 +7,8 @@ use App\Models\JenisUser;
 use App\Models\complain;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\SendEmail;
 
 class ReviewComplainController extends Controller
 {
@@ -55,11 +57,18 @@ class ReviewComplainController extends Controller
 
     public function update(Request $request, ReviewComplain $reviewcomplain, $id)
     {
+
         $validateData = $request->validate([
             'tanggapan' => 'required'
         ]);
 
         Complain::where('id', $id)->update($validateData);
+
+        $complain = Complain::findOrFail($id);
+        $userEmail = $complain->email; // Atau relasi
+        $userNama = $complain->nama;
+
+        Mail::to($userEmail)->send(new SendEmail($userNama));
         return redirect('/review-complain')->with('pesan', 'Data berhasil diubah');
     }
 

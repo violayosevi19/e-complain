@@ -33,4 +33,5 @@ Route::post('/complain/read/{id}', [ReviewComplainController::class, 'markAsRead
 Route::get('/review-complain/read/{id}', [ReviewComplainController::class, 'read'])->name('review-complain.read');
 Route::get('/register', [LoginControllerController::class, 'register']);
 Route::post('/register', [LoginControllerController::class, 'registerProcess'])->name('register.process');
+
 // Route::delete('/review-complain/{id}',[ReviewComplainController::class,'destroy']);
