@@ -18,7 +18,7 @@ class LoginControllerController extends Controller
     {
         $jenisUser = JenisUser::pluck('jenisuser')->toArray();
         $hideActions = in_array('Pasien', $jenisUser) && !Auth::check();
-        return view('ecomplain.Register', ['hideActions' => $hideActions,]);
+        return view('ecomplain.register', ['hideActions' => $hideActions,]);
     }
 
 
