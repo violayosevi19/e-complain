@@ -68,7 +68,8 @@
                             <h4 class="card-title text-center">Laporan Complain</h4>
                         </div>
                         <div class="d-flex justify-content-end">
-                            <a href="{{ route('downloadLaporan', request()->query()) }}" class="btn btn-success btn-sm mr-2">
+                            <a href="{{ route('downloadLaporan', request()->query()) }}"
+                                class="btn btn-success btn-sm mr-2">
                                 Download Laporan
                             </a>
                         </div>
@@ -132,7 +133,7 @@
                                                 <div class="flex flex-col gap-4">
                                                     <a href="/review-complain/{{ $review->id }}/edit"
                                                         class="btn btn-warning">Tanggapi</a>
-                                                    <form class="d-inline" action="/ecomplain/{{ $review->id }}"
+                                                    <form class="d-inline" action="/review-complain/{{ $review->id }}"
                                                         method="post">
                                                         @method('delete')
                                                         @csrf

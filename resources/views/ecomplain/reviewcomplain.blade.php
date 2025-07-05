@@ -103,7 +103,7 @@
                                                 <div class="flex flex-col gap-4">
                                                     <a href="/review-complain/{{ $review->id }}/edit"
                                                         class="btn btn-warning">Tanggapi</a>
-                                                    <form class="d-inline" action="/ecomplain/{{ $review->id }}"
+                                                    <form class="d-inline" action="/review-complain/{{ $review->id }}"
                                                         method="post">
                                                         @method('delete')
                                                         @csrf

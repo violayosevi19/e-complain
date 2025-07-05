@@ -72,7 +72,11 @@ class ReviewComplainController extends Controller
         return redirect('/review-complain')->with('pesan', 'Data berhasil diubah');
     }
 
-    public function destroy(ReviewComplain $reviewComplain) {}
+    public function destroy($id)
+    {
+        Complain::destroy($id);
+        return redirect('/review-complain')->with('pesan', 'Data berhasil dihapus');
+    }
 
     public function read($id)
     {
