@@ -164,6 +164,7 @@
                 <tr>
                     <th>No</th>
                     <th>Nama</th>
+                    <th>Email</th>
                     <th>Tanggal/Waktu</th>
                     <th>Jenis Complain</th>
                     <th>Complain</th>
@@ -177,6 +178,7 @@
                     <tr>
                         <td class="small-col">{{ $index }}</td>
                         <td>{{ $item->nama }}</td>
+                        <td>{{ $item->email }}</td>
                         <td>{{ $item->created_at?->format('d M Y , H:i') ?? date('d-m-Y H:i') }}</td>
                         <td>{{ $item->jeniscomplain_id }}</td>
                         <td>{{ $item->complain }}</td>

@@ -70,13 +70,21 @@
                                     <textarea type="text" class="form-control" name="tanggapan" id="tanggapan" aria-describedby="emailHelp"
                                         style="height:50vh;">{{ $complains->tanggapan ? $complains->tanggapan : '' }}</textarea>
                                 </div>
+                                @if ($complains->tanggapan !== null)
+                                    <div class="mb-3">
+                                        <p>
+                                            <i class="fa-solid fa-circle-check text-success"></i> Tanggapan telah ditanggapi
+                                        </p>
+
+                                    </div>
+                                @endif
+
                                 <div class="d-flex">
                                     <button type="submit" class="btn btn-primary text-center" name="submit"
                                         id="submit">Simpan</button>
                                     <a href="/review-complain" class="btn btn-info text-center w-100"
                                         style="margin-left: 1rem;">Kembali</a>
                                 </div>
-
                             </form>
                         </div>
                     </div>

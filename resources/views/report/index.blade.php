@@ -2,7 +2,7 @@
 @section('container')
     <nav class="navbar navbar-expand-lg " color-on-scroll="500">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#pablo"> Review Complain </a>
+            <a class="navbar-brand" href="#pablo"> Laporan Complain </a>
             <button href="" class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
                 aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-bar burger-lines"></span>
@@ -65,9 +65,38 @@
                 <div class="col-md-12">
                     <div class="card ">
                         <div class="card-header ">
-                            <h4 class="card-title text-center">Review Complain</h4>
+                            <h4 class="card-title text-center">Laporan Complain</h4>
+                        </div>
+                        <div class="d-flex justify-content-end">
+                            <a href="{{ route('downloadLaporan', request()->query()) }}" class="btn btn-success btn-sm mr-2">
+                                Download Laporan
+                            </a>
                         </div>
                         <div class="card-body table-responsive p-4">
+                            <form action="{{ url('laporan') }}" method="GET" class="row mb-3 align-items-end">
+                                <div class="col-md-4">
+                                    <label for="filterTanggal" class="form-label">Filter Tanggal/Waktu</label>
+                                    <input type="date" id="filterTanggal" name="tanggal" value="{{ request('tanggal') }}"
+                                        class="form-control form-control-sm">
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="filterJenis" class="form-label">Filter Jenis Complain</label>
+                                    <select id="filterJenis" name="jenis_complain" class="form-control form-control-sm">
+                                        <option value="">Semua</option>
+                                        @foreach ($jeniscomplains as $jenis)
+                                            <option value="{{ $jenis->jeniscomplain }}"
+                                                {{ request('jenis_complain') == $jenis->id ? 'selected' : '' }}>
+                                                {{ $jenis->jeniscomplain }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="form-label d-block">&nbsp;</label>
+                                    <button type="submit" class="btn btn-primary btn-sm w-100">Filter</button>
+                                </div>
+                            </form>
+
                             <table class="table table-hover" id="myTable">
                                 <thead>
                                     <tr>

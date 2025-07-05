@@ -17,7 +17,10 @@ class HomeController extends Controller
         $notifications = Complain::where('is_read', false)->orderBy('created_at', 'desc')->take(5)->get();
         $jenisUser = JenisUser::pluck('jenisuser')->toArray();
         $hideActions = true; // default sembunyi form
-
+        $review_complain = complain::where('user_id', auth()->user()->id)->orderBy('created_at', 'desc')->get();
+        $hasPendingTanggapan = $review_complain->contains(function ($complain) {
+            return $complain->tanggapan === null; // adjust sesuai field kamu
+        });
         if (Auth::check()) {
             // Misal kolom role langsung di users
             $role = auth()->user()->jenisuser_id;
@@ -30,8 +33,9 @@ class HomeController extends Controller
             'notifications' => $notifications,
             'dashboard' => jeniscomplain::All(),
             'hideActions' => $hideActions,
-            'reviewcomplain' => complain::orderBy('created_at', 'desc')->get(),
+            'reviewcomplain' => $review_complain,
             'jeniscomplains' => jeniscomplain::All(),
+            'hasPending' => $hasPendingTanggapan
         ]);
     }
 }

@@ -78,6 +78,10 @@
                 </div>
             </div>
             @if (auth()->user()->jenisuser_id === 'Pasien')
+                @php
+                    $user_email = auth()->user()->email;
+                    $userId = auth()->user()->id;
+                @endphp
                 <div class="row">
                     <div class="col-md-4">
                         <div class="card ">
@@ -125,19 +129,25 @@
                                 <form action="/ecomplain" method="post" enctype="multipart/form-data">
                                     @csrf
                                     <div class="mb-3">
+                                        <input type="text" class="form-control" name="user_id" id="user_id"
+                                            aria-describedby="user_id" value="{{ $userId }}" hidden
+                                            @if ($hasPending) disabled @endif>
                                         <label for="nama" class="form-label label-complain">Nama</label>
                                         <input type="text" class="form-control" name="nama" id="nama"
-                                            aria-describedby="nama">
+                                            aria-describedby="nama" @if ($hasPending) disabled @endif>
                                     </div>
                                     <div class="mb-3">
                                         <label for="email" class="form-label label-complain">Email</label>
                                         <input type="text" class="form-control" name="email" id="email"
-                                            aria-describedby="email">
+                                            aria-describedby="email" value="{{ $user_email }}"
+                                            @if ($hasPending) disabled @endif>
                                     </div>
                                     <div class="dropdown">
                                         <a id="jenisComplainDropdown" class="dropdown-toggle btn ml-1 mt-1 mb-3"
                                             type="button" href="http://example.com" id="navbarDropdownMenuLink"
-                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                            @if ($hasPending) disabled @endif
+                                            @if ($hasPending) style="pointer-events: none; opacity: 0.6; cursor: not-allowed;" @endif>
                                             <span class="no-icon">Silahkan Pilih Jenis Complain</span>
                                         </a>
                                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
@@ -147,18 +157,19 @@
                                             @endforeach
                                         </div>
                                         <input type="hidden" id="hiddenJenisComplainInput" name="jeniscomplain_id"
-                                            value="">
+                                            value="" @if ($hasPending) disabled @endif>
                                     </div>
                                     <div class="mb-3">
                                         <label for="fileUpload" class="form-label label-complain">Upload Bukti
                                         </label>
                                         <input class="form-control form-control-sm" type="file" id="fileUpload"
-                                            name="image">
+                                            name="image" @if ($hasPending) disabled @endif>
                                     </div>
                                     <div class="mb-3">
                                         <label for="exampleInputEmail1" class="form-label label-complain">Tulis complain
                                             disini</label>
-                                        <textarea type="text" class="form-control" name="complain" id="complain" aria-describedby="emailHelp"></textarea>
+                                        <textarea type="text" class="form-control" name="complain" id="complain" aria-describedby="emailHelp"
+                                            @if ($hasPending) disabled @endif></textarea>
                                     </div>
                                     <button type="submit" class="btn btn-primary text-center" name="submit"
                                         id="submit">Laporkan</button>
@@ -174,23 +185,22 @@
                                 <h4 class="card-title text-center">Review Complain</h4>
                             </div>
                             <div class="d-flex justify-content-end">
-                                <a href="/laporan" class="btn btn-primary mr-2">Download File
+                                <a href="/download-laporan" class="btn btn-primary mr-2">Download File
                                 </a>
                             </div>
                             <div class="card-body table-full-width table-responsive">
-                                <table class="table table-hover table-lg">
+                                <table class="table table-hover table-lg" id="myTable">
                                     <thead>
-                                        <th>No</th>
-                                        <th>Nama</th>
-                                        <th>Email</th>
-                                        <th>Tanggal/Waktu</th>
-                                        <th>Jenis Complain</th>
-                                        <th>Complain</th>
-                                        <th>Image</th>
-                                        <th>Tanggapan Complain</th>
-                                        @if (!$hideActions)
-                                            <th>Aksi</th>
-                                        @endif
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Nama</th>
+                                            <th>Email</th>
+                                            <th>Tanggal/Waktu</th>
+                                            <th>Jenis Complain</th>
+                                            <th>Complain</th>
+                                            <th>Image</th>
+                                            <th>Tanggapan Complain</th>
+                                        </tr>
                                     </thead>
                                     <tbody>
                                         @php
@@ -210,20 +220,6 @@
                                                         alt="Gambar Bukti" width="100">
                                                 </td>
                                                 <td>{{ $review->tanggapan }}</td>
-                                                @if (!$hideActions)
-                                                    <td>
-                                                        <a href="/review-complain/{{ $review->id }}/edit"
-                                                            class="btn btn-warning">Berikan Tanggapan</a>
-                                                        <form class="d-inline" action="/ecomplain/{{ $review->id }}"
-                                                            method="post">
-                                                            @method('delete')
-                                                            @csrf
-                                                            <button class="btn btn-danger ml-2"
-                                                                onclick="return confirm('Yakin ingin menghapus data ?')">Delete
-                                                            </button>
-                                                        </form>
-                                                    </td>
-                                                @endif
                                             </tr>
                                         @endforeach
                                     </tbody>
@@ -238,3 +234,53 @@
         </div>
     </div>
 @endsection
+<script src="/../assets/js/core/jquery.3.2.1.min.js" type="text/javascript"></script>
+
+<script>
+    $(document).ready(function() {
+        setTimeout(function() {
+            $("#alert").fadeOut("slow");
+        }, 3000);
+    });
+</script>
+<script>
+    $(document).ready(function() {
+        $('#myTable').DataTable({
+            orderCellsTop: true,
+            fixedHeader: true,
+            paging: true,
+            pageLength: 10,
+            lengthMenu: [
+                [20, 25, 50, -1],
+                [10, 25, 50, "All"]
+            ],
+            language: {
+                info: false,
+                infoEmpty: "Menampilkan 0 sampai 0 dari 0 data",
+                infoFiltered: "(disaring dari _MAX_ total data)",
+                lengthMenu: "Tampilkan _MENU_ data per halaman",
+                zeroRecords: "Data Tidak Ditemukan",
+                search: "Cari:",
+                paginate: {
+                    first: "Pertama",
+                    last: "Terakhir",
+                    next: "Selanjutnya",
+                    previous: "Sebelumnya"
+                }
+            },
+            info: false
+        });
+        $('#myTable').parent().css('text-align', 'right');
+        $('.dataTables_length label .form-select').css({
+            'padding-right': '20px',
+            'white-space': 'nowrap',
+            'width': '30%'
+        });
+        $('#myTable_info').css({
+            'font-family': 'Open Sans, sans-serif',
+            'font-size': '12px'
+        });
+        $('.dataTables_paginate .pagination .active .page-link').css('color', 'white');
+    });
+</script>
+

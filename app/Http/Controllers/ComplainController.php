@@ -29,7 +29,8 @@ class ComplainController extends Controller
             'email' => 'required',
             'jeniscomplain_id' => 'required',
             'complain' => 'required',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif'
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif',
+            'user_id' => 'nullable'
         ]);
 
         if ($request->hasFile('image')) {

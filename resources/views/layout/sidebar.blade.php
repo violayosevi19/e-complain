@@ -24,6 +24,12 @@
                     <p>Review Complain</p>
                 </a>
             </li>
+            <li class=" {{ Request::is('laporan') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ url('laporan') }}">
+                    <i class="fas fa-file-alt"></i> Laporan
+                    <p>Laporan</p>
+                </a>
+            </li>
         @endif
 
 

@@ -29,6 +29,7 @@ Route::resource('/home', HomeController::class);
 Route::resource('/ecomplain', ComplainController::class);
 Route::resource('/review-complain', ReviewComplainController::class);
 Route::get('/laporan', [LaporanController::class, 'laporan']);
+Route::get('/download-laporan', [LaporanController::class, 'downloadLaporan'])->name('downloadLaporan');
 Route::post('/complain/read/{id}', [ReviewComplainController::class, 'markAsRead']);
 Route::get('/review-complain/read/{id}', [ReviewComplainController::class, 'read'])->name('review-complain.read');
 Route::get('/register', [LoginControllerController::class, 'register']);

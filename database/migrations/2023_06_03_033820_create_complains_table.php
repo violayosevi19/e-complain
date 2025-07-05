@@ -19,6 +19,7 @@ return new class extends Migration
             $table->text('tanggapan')->nullable();
             $table->text('image')->nullable();
             $table->boolean('is_read')->default(false);
+            $table->boolean('user_id')->default(false);
             $table->timestamps();
         });
     }
