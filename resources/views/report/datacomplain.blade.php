@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>CETAK TOKO CVBRV</title>
+    <title>CETAK LAPORAN COMPLAIN</title>
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paper-css/0.4.1/paper.css"> -->
     <style type="text/css">
         header .nohp,
@@ -16,6 +16,7 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
+            font-size: 12px;
         }
 
         .container {
@@ -75,6 +76,7 @@
             border: 1px solid #ccc;
             padding: 8px;
             text-align: center;
+            word-break: break-word;
         }
 
         th {
@@ -91,7 +93,12 @@
 
         th,
         td {
-            width: 25%;
+            width: 10%;
+        }
+
+        td:last-child {
+            max-width: 25%;
+            /* batas lebar kolom tanggapan, boleh disesuaikan */
         }
 
         .title {

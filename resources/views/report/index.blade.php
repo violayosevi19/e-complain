@@ -75,12 +75,17 @@
                         </div>
                         <div class="card-body table-responsive p-4">
                             <form action="{{ url('laporan') }}" method="GET" class="row mb-3 align-items-end">
-                                <div class="col-md-4">
-                                    <label for="filterTanggal" class="form-label">Filter Tanggal/Waktu</label>
-                                    <input type="date" id="filterTanggal" name="tanggal" value="{{ request('tanggal') }}"
-                                        class="form-control form-control-sm">
+                                <div class="col-md-2">
+                                    <label for="filterTanggal" class="form-label">Tanggal Awal</label>
+                                    <input type="date" id="filterTanggal" name="tanggal_awal"
+                                        value="{{ request('tanggal_mulai') }}" class="form-control form-control-sm">
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-2">
+                                    <label for="filterTanggalAkhir" class="form-label">Tanggal Akhir</label>
+                                    <input type="date" id="filterTanggalAkhir" name="tanggal_akhir"
+                                        value="{{ request('tanggal_akhir') }}" class="form-control form-control-sm">
+                                </div>
+                                <div class="col-md-2">
                                     <label for="filterJenis" class="form-label">Filter Jenis Complain</label>
                                     <select id="filterJenis" name="jenis_complain" class="form-control form-control-sm">
                                         <option value="">Semua</option>
