@@ -45,6 +45,8 @@ class ReviewComplainController extends Controller
         $notifications = Complain::where('is_read', false)->orderBy('created_at', 'desc')->take(5)->get();
         $jenisUser = JenisUser::pluck('jenisuser')->toArray();
         $hideActions = in_array('Pasien', $jenisUser) && !Auth::check();
+        // dd(Complain::find($id));
+
         return view('ecomplain.formtanggapan', [
             // 'complains' => Complain::find($reviewcomplain->id)
             'notifications' => $notifications,
@@ -59,7 +61,8 @@ class ReviewComplainController extends Controller
     {
 
         $validateData = $request->validate([
-            'tanggapan' => 'required'
+            'tanggapan' => 'required',
+            'status' => 'nullable'
         ]);
 
         Complain::where('id', $id)->update($validateData);

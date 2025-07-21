@@ -114,6 +114,7 @@
                                         <th style="border: none;">Complain</th>
                                         <th style="border: none;">Image</th>
                                         <th style="border: none;">Tanggapan Complain</th>
+                                        <th style="border: none;">Status</th>
                                         <th style="border: none;">Aksi</th>
                                     </tr>
                                 </thead>
@@ -134,6 +135,15 @@
                                                     width="100">
                                             </td>
                                             <td>{{ $review->tanggapan }}</td>
+                                            <td>
+                                                @if ($review->status == 'Belum Diproses' || $review->status == 'unprocess')
+                                                    <span class="badge badge-secondary">Belum Diproses</span>
+                                                @elseif($review->status == 'Sedang Dikerjakan')
+                                                    <span class="badge badge-warning">Sedang Dikerjakan</span>
+                                                @elseif($review->status == 'Sudah Selesai Dikerjakan')
+                                                    <span class="badge badge-success">Sudah Selesai Dikerjakan</span>
+                                                @endif
+                                            </td>
                                             <td>
                                                 <div class="flex flex-col gap-4">
                                                     <a href="/review-complain/{{ $review->id }}/edit"

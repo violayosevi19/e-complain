@@ -70,10 +70,45 @@
                                     <textarea type="text" class="form-control" name="tanggapan" id="tanggapan" aria-describedby="emailHelp"
                                         style="height:50vh;">{{ $complains->tanggapan ? $complains->tanggapan : '' }}</textarea>
                                 </div>
+                                <div class="dropdown mb-3">
+                                    <a id="jenisComplainDropdown" class="dropdown-toggle btn btn-secondary" type="button"
+                                        href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <span class="no-icon" id="selectedStatusLabel">
+                                            @switch($complains->status)
+                                                @case('Belum Diproses')
+                                                    Belum Diproses
+                                                @break
+
+                                                @case('Sedang Dikerjakan')
+                                                    Sedang Dikerjakan
+                                                @break
+
+                                                @case('Sudah Selesai Dikerjakan')
+                                                    Sudah Selesai Dikerjakan
+                                                @break
+
+                                                @default
+                                                    Pilih Status
+                                            @endswitch
+                                        </span>
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="jenisComplainDropdown">
+                                        <a class="dropdown-item" href="#" data-value="Belum Diproses">Belum
+                                            Diproses</a>
+                                        <a class="dropdown-item" href="#" data-value="Sedang Dikerjakan">Sedang
+                                            Dikerjakan</a>
+                                        <a class="dropdown-item" href="#" data-value="Sudah Selesai Dikerjakan">Sudah
+                                            Selesai Dikerjakan</a>
+                                    </div>
+                                    <input type="hidden" id="hiddenJenisComplainInput" name="status"
+                                        value="{{ $complains->status }}">
+                                </div>
+
                                 @if ($complains->tanggapan !== null)
                                     <div class="mb-3">
                                         <p>
-                                            <i class="fa-solid fa-circle-check text-success"></i> Tanggapan telah ditanggapi
+                                            <i class="fa-solid fa-circle-check text-success"></i> Tanggapan telah
+                                            ditanggapi
                                         </p>
 
                                     </div>

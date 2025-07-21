@@ -54,7 +54,7 @@
                             </div>
                             @if ($hideActions)
                                 <div>
-                                    <a href="/register">Belum punya akun?Daftar disini</a>
+                                    <a href="/register">Pasien Baru (Registrasi)?Daftar disini</a>
                                 </div>
                             @endif
 
